@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mRecyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:orientation="vertical"
+    tools:context=".MainActivitySaida">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edittextSaida"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/valor"
+            android:inputType="numberDecimal"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="7dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:text="@string/save"
+                android:textSize="35sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="7dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20sp"
+                android:layout_weight="1"
+                android:text="Limpar"
+                android:textSize="35sp" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edittextCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Categoria"
+            android:textSize="30sp" />
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Criar Categoria"
+            android:textSize="35sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/buttonFechar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fechar Tabela"
+                android:textSize="25dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>
+
+
+
+
+
+

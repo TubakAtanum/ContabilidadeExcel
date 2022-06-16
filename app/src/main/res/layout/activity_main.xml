@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/buttonEntrada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:onClick="janelaEntrada"
+        android:text="@string/entrada"
+        android:textSize="50sp"
+        app:backgroundTint="@color/verde" />
+
+    <Button
+        android:id="@+id/buttonSaida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50sp"
+        android:onClick="janelaSaida"
+        android:text="@string/saida"
+        android:textSize="50sp"
+        app:backgroundTint="@color/vermelha" />
+
+    <Button
+        android:id="@+id/criartabela"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Criar tabela"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/abrirtabela"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Abrir Tabela"
+        android:textSize="20sp" />
+
+
+</LinearLayout>
+
+
+
+
+
+
