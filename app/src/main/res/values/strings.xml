@@ -16,7 +16,8 @@
     <string name="agua">Água</string>
     <string name="aluguel">Aluguel</string>
     <string name="descricao">Descição</string>
-    <string name="Categoria">Categoria</string> />
+    <string name="Categoria">Categoria</string>
+    />
     <string-array name="Valores">
         <item>Compras</item>
         <item>Aluguel</item>

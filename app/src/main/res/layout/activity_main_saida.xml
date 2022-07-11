@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
     android:orientation="vertical"
-    tools:context=".MainActivitySaida">
+    tools:context=".Activities.MainActivitySaida">
 
 
     <LinearLayout
@@ -72,7 +72,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/buttonFechar"
@@ -80,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:text="Fechar Tabela"
                 android:textSize="25dp"/>
+
         </LinearLayout>
 
     </LinearLayout>

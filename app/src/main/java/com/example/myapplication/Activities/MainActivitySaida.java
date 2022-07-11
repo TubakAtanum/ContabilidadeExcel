@@ -1,32 +1,22 @@
-package com.example.myapplication;
+package com.example.myapplication.Activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.Lifecycle;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
+import com.example.myapplication.PrefConfig.PrefConfig;
+import com.example.myapplication.R;
+import com.example.myapplication.SQL.Dados;
+import com.example.myapplication.SQL.DataBaseHelper;
 
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -35,7 +25,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,23 +33,22 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
-
 
 public class MainActivitySaida extends AppCompatActivity {
 
     EditText edtSaida, edtCategoria;
-    Button btnSaveSaida, buttonAdd;
+    Button btnSaveSaida, buttonAdd, buttonFechar;
     Spinner spinner;
     ArrayList<String> list;
 
     //Pegar a data e setar para o formato pt-BR
-    Locale local = new Locale("pt", "BR");
-    DateFormat formarto = new SimpleDateFormat("dd/MM/yyyy", local);
-    String dataDeHoje = formarto.format(Calendar.getInstance().getTime());
+    static Locale local = new Locale("pt", "BR");
+    static DateFormat formato = new SimpleDateFormat("dd/MM/yyyy", local);
+    static DateFormat mes = new SimpleDateFormat("MMMM", local);
+    String dataDeHoje = formato.format(Calendar.getInstance().getTime());
+    String dataMes = mes.format(Calendar.getInstance().getTime());
 
     //Pegar o diretorio do aquivo
     String nomeArquivo = "/Demo.xls";
@@ -76,17 +64,17 @@ public class MainActivitySaida extends AppCompatActivity {
         btnSaveSaida = (Button) findViewById(R.id.buttonSave);
         spinner = (Spinner) findViewById(R.id.spinner);
         buttonAdd = (Button) findViewById(R.id.buttonAdd);
-        list = PrefConfig.readListFromPref(this);
+        buttonFechar = findViewById(R.id.buttonFechar);
+        list = PrefConfig.readArrayFromPref(this);
 
         if (list == null)
-            list = new ArrayList<String>();
+            list = new ArrayList<>();
             list.add("Aluguel");
             list.add("Compras");
             list.add("Agua");
             list.add("Energia");
             list.add("Transporte");
-            list.add("Internet");;
-
+            list.add("Internet");
 
         final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list);
         spinner.setAdapter(arrayAdapter);
@@ -95,6 +83,7 @@ public class MainActivitySaida extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 adicionarValor();
+                pegarDados();
             }
         });
 
@@ -103,11 +92,50 @@ public class MainActivitySaida extends AppCompatActivity {
             public void onClick(View view) {
                 String categoria = edtCategoria.getText().toString();
                 list.add(categoria);
-                PrefConfig.writeListInPref(getApplicationContext(), list);
+                PrefConfig.writeArrayInPref(getApplicationContext(), list);
                 arrayAdapter.notifyDataSetChanged();
             }
         });
 
+        buttonFechar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fecharTabela();
+                novoMes();
+            }
+        });
+    }
+
+    private void pegarDados(){
+        String categoria = spinner.getSelectedItem().toString();
+        int valor = Integer.parseInt(edtSaida.getText().toString());
+
+        Dados dados = new Dados(-1,categoria,System.currentTimeMillis(),valor);
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivitySaida.this);
+
+        boolean sucess = dataBaseHelper.addOne(dados);
+        Toast.makeText(this, "Sucess" + sucess, Toast.LENGTH_SHORT).show();
+    }
+
+    private void novoMes() {
+        try {
+            FileInputStream fip = new FileInputStream(yourDir);
+            Workbook wb = WorkbookFactory.create(fip);
+            Sheet sheet = wb.cloneSheet(0);
+            try {
+                wb.getSheetAt(1);
+                wb.setSheetName(1, dataMes);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(MainActivitySaida.this, "Espere ate o proximo mes para criar uma nova planilha", Toast.LENGTH_SHORT).show();
+            }
+            fip.close();
+            FileOutputStream fileOutputStream = new FileOutputStream(yourDir);
+            wb.write(fileOutputStream);
+            fileOutputStream.close();
+        } catch (IOException | InvalidFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     private void adicionarValor() {
@@ -130,16 +158,8 @@ public class MainActivitySaida extends AppCompatActivity {
             Row row = sheet.getRow(ultimaLinha);
             String dataCell = row.getCell(0).getStringCellValue();
 
-            //Cellstyle para as colunas
-            CellStyle cellStyleVermelho = wb.createCellStyle();
-            cellStyleVermelho.setFillForegroundColor(HSSFColor.RED.index);
-            cellStyleVermelho.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-            cellStyleVermelho.setBorderBottom(BorderStyle.THIN);
-            cellStyleVermelho.setBorderTop(BorderStyle.THIN);
-            cellStyleVermelho.setBorderLeft(BorderStyle.THIN);
-            cellStyleVermelho.setBorderRight(BorderStyle.THIN);
-
             //Criando estilo para o resto das celulas
+            CellStyle vermelho = wb.getCellStyleAt(5);
             CellStyle cellStyleResto = wb.createCellStyle();
             cellStyleResto.setBorderBottom(BorderStyle.THIN);
             cellStyleResto.setBorderTop(BorderStyle.THIN);
@@ -154,8 +174,8 @@ public class MainActivitySaida extends AppCompatActivity {
             //Cria uma coluna nova com a categoria caso não exista
             Row rowColuna = sheet.getRow(0);
             rowColuna.createCell(posicao+4).setCellValue(tipoSaida);
-            rowColuna.getCell(posicao+4).setCellStyle(cellStyleVermelho);
-            cellStyleVermelho.setFont(font);
+            rowColuna.getCell(posicao+4).setCellStyle(vermelho);
+            vermelho.setFont(font);
 
             //Adiciona o valor embaixo da coluna
             Row rowValor = sheet.getRow(ultimaLinha);
@@ -184,6 +204,35 @@ public class MainActivitySaida extends AppCompatActivity {
         }
     }
 
+    private void fecharTabela() {
+        try {
+            FileInputStream fip = new FileInputStream(yourDir);
+            Workbook wb = WorkbookFactory.create(fip);
+            Sheet sheet = wb.getSheetAt(0);
 
-    
+            int ultimaLinha = sheet.getLastRowNum();
+            int rowNumber = 1;
+
+            Row rowFechamento = sheet.createRow(++ultimaLinha);
+            Cell cellFechamento = rowFechamento.createCell(0);
+            cellFechamento.setCellValue("Total");
+
+            String strFormula = "SUM(E2:Z"+rowNumber+")";
+            Cell cellSoma = rowFechamento.createCell(1);
+            cellSoma.setCellFormula(strFormula);
+            cellSoma.setCellValue(true);
+
+            Toast.makeText(MainActivitySaida.this, "Tabela Salva", Toast.LENGTH_SHORT).show();
+
+            fip.close();
+            FileOutputStream fileOutputStream = new FileOutputStream(yourDir);
+            wb.write(fileOutputStream);
+            fileOutputStream.close();
+
+        } catch (Exception e){
+            Toast.makeText(MainActivitySaida.this, "Não foi possivel fechar", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
 }

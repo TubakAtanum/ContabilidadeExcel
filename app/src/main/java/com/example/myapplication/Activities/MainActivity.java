@@ -1,23 +1,20 @@
-package com.example.myapplication;
+package com.example.myapplication.Activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.Browser;
-import android.text.SpannableString;
-import android.text.style.StyleSpan;
-import android.view.PixelCopy;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.example.myapplication.R;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFPalette;
@@ -48,11 +45,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
 
-    Button btncriarTabela;
-    Button btnsaida;
-    Button btnentradada;
-    Button btnAbrirTabela;
-
+    Button btncriarTabela, btnsaida, btnentradada, btnAbrirTabela, btnAbrirExtrato;
 
     @SuppressLint("SimpleDateFormat")
 
@@ -84,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         btnentradada = (Button) findViewById(R.id.buttonEntrada);
         btncriarTabela = (Button) findViewById(R.id.criartabela);
         btnAbrirTabela = (Button) findViewById(R.id.abrirtabela);
+        btnAbrirExtrato = (Button) findViewById(R.id.abrirExtrato);
 
         btncriarTabela.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Criação da tabela
         Workbook wb = new HSSFWorkbook();
-        Sheet sheet = wb.createSheet("new sheet");
+        Sheet sheet = wb.createSheet(dataMes);
         sheet.setDefaultColumnWidth(12);
 
         //Criando os estilos das celulas na cor verde (usado nos valores)
@@ -220,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             //if (filePath.exists()) {
-                //Toast.makeText(this, "Tabela já existe", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Tabela já existe", Toast.LENGTH_SHORT).show();
             //}
 
             FileOutputStream fileOutputStream = new FileOutputStream(filePath);
@@ -247,10 +241,11 @@ public class MainActivity extends AppCompatActivity {
     public void janelaEntrada(View view) {
         Intent entradaIntent = new Intent(MainActivity.this, MainActivityEntrada.class);
         startActivity(entradaIntent);
-
-
     }
 
-
+    public void janelaExtrato(View view){
+        Intent extratoIntent = new Intent(MainActivity.this, ActivityExtrato.class);
+        startActivity(extratoIntent);
+    }
 }
 

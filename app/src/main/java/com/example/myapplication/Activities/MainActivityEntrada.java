@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -14,24 +14,22 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import com.example.myapplication.R;
+
 import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.w3c.dom.Document;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class MainActivityEntrada extends AppCompatActivity {
@@ -43,6 +41,7 @@ public class MainActivityEntrada extends AppCompatActivity {
     RadioButton rbPix;
     RadioButton rbDinheiro;
     RadioGroup rgEntrada;
+    ArrayList<String> list;
 
     //Pegar a data e setar para o formato pt-BR
     Locale local = new Locale("pt", "BR");
