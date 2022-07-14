@@ -110,7 +110,7 @@ public class MainActivitySaida extends AppCompatActivity {
         String categoria = spinner.getSelectedItem().toString();
         int valor = Integer.parseInt(edtSaida.getText().toString());
 
-        Dados dados = new Dados(-1,categoria,System.currentTimeMillis(),valor);
+        Dados dados = new Dados(-1,categoria,dataDeHoje,valor);
         DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivitySaida.this);
 
         boolean sucess = dataBaseHelper.addOne(dados);

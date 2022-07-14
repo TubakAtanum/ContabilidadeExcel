@@ -39,7 +39,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
 
         cv.put(CATEGORIA, dados.getCategoria());
-        cv.put(DATA, dados.getCreatedAt());
+        cv.put(DATA, dados.getData());
         cv.put(VALOR, dados.getValor());
 
         long insert = db.insert(DADOS, null, cv);
@@ -47,7 +47,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return false;
         }
         else
-        return true;
+            return true;
     }
 
     public List<Dados> getAll(){
@@ -64,7 +64,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do {
                 int dadoID = cursor.getInt(0);
                 String dadoCategoria = cursor.getString(1);
-                long dadoData = cursor.getLong(2);
+                String dadoData = cursor.getString(2);
                 int dadoValor = cursor.getInt(3);
 
                 Dados dados = new Dados(dadoID,dadoCategoria,dadoData,dadoValor);
