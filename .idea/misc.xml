@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/ContabilidadeExcel/app/src/main/res/drawable/ic_baseline_attach_money_24.xml" value="0.2685" />
+        <entry key="..\:/Android/ContabilidadeExcel/app/src/main/res/drawable/ic_baseline_money_off_24.xml" value="0.2685" />
+        <entry key="..\:/Android/ContabilidadeExcel/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2685" />
+        <entry key="..\:/Android/ContabilidadeExcel/app/src/main/res/layout/activity_cardview_extrato.xml" value="0.2759259259259259" />
         <entry key="..\:/Android/MyApplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1845" />
         <entry key="..\:/Android/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Android/MyApplication/app/src/main/res/layout/activity_main2.xml" value="0.33" />
