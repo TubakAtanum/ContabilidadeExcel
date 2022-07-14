@@ -2,13 +2,15 @@ package com.example.myapplication.SQL;
 
 public class Dados {
     public String categoria;
-    public Long createdAt;
+    public String data;
     public int valor;
     public int id;
 
-    public Dados(int id, String categoria, long createdAt, int valor) {
+
+    public Dados(int id, String categoria, String data, int valor) {
+
         this.categoria = categoria;
-        this.createdAt = createdAt;
+        this.data = data;
         this.valor = valor;
         this.id = id;
     }
@@ -17,7 +19,7 @@ public class Dados {
     public String toString() {
         return "Dados{" +
                 "categoria='" + categoria + '\'' +
-                ", createdAt=" + createdAt +
+                ", data=" + data +
                 ", valor=" + valor +
                 ", id=" + id +
                 '}';
@@ -34,12 +36,12 @@ public class Dados {
         this.categoria = categoria;
     }
 
-    public Long getCreatedAt() {
-        return createdAt;
+    public String getData() {
+        return data;
     }
 
-    public void setCreatedAt(Long createdAt) {
-        this.createdAt = createdAt;
+    public void setdata(String createdAt) {
+        this.data = createdAt;
     }
 
     public int getValor() {
@@ -57,4 +59,6 @@ public class Dados {
     public void setId(int id) {
         this.id = id;
     }
+
+
 }
