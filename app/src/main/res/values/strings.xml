@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="entrada">Entrada</string>
+    <string name="saida">Saída</string>
+    <string name="valor">Valor R$:</string>
+    <string name="cartao">Cartão</string>
+    <string name="dinheiro">Dinheiro</string>
+    <string name="pix">Pix</string>
+    <string name="save">Save</string>
+    <string name="compras">Compras</string>
+    <string name="dispesas_gerais">Dispesas Gerais</string>
+    <string name="marketing">Marketing</string>
+    <string name="internete_e_telefone">Internete e telefone</string>
+    <string name="trasporte">Trasporte</string>
+    <string name="energia">Energia</string>
+    <string name="agua">Água</string>
+    <string name="aluguel">Aluguel</string>
+    <string name="descricao">Descição</string>
+    <string name="Categoria">Categoria</string>
+    />
+    <string-array name="Valores">
+        <item>Compras</item>
+        <item>Aluguel</item>
+        <item>Agua</item>
+        <item>Eneriga</item>
+        <item>Transporte</item>
+        <item>Internet</item>
+    </string-array>
+</resources>

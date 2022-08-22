@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10sp"
+    android:layout_marginTop="3dp"
+    android:orientation="vertical"
+    tools:context=".Activities.MainActivityEntrada">
+
+    <EditText
+        android:id="@+id/edittextEntrada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/valor"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:textSize="30sp" />
+
+
+    <RadioGroup
+        android:id="@+id/radiogroupEntrada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+
+        <RadioButton
+            android:id="@+id/radioBtnCartao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:checked="true"
+            android:text="@string/cartao"
+            android:textSize="30sp" />
+
+        <RadioButton
+            android:id="@+id/radioBtnDinheiro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/dinheiro"
+            android:textSize="30sp" />
+
+        <RadioButton
+            android:id="@+id/radioBtnPix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/pix"
+            android:textSize="30sp" />
+    </RadioGroup>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20sp">
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="7dp"
+            android:layout_weight="8"
+            android:text="@string/save"
+            android:textSize="35sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="7dp"
+            android:layout_weight="1"
+            android:text="Limpar"
+            android:textSize="35sp"
+            android:layout_marginBottom="20sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
